@@ -1,0 +1,7 @@
+#:schema node_modules/wrangler/config-schema.json
+compatibility_date = "2026-01-14"
+name = "nakshatravidya"
+pages_build_output_dir = "dist"
+
+[vars]
+# Add any environment variables here
