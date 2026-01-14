@@ -6,6 +6,9 @@ import MoonOverviewCard from './components/MoonOverviewCard';
 import { AveragesWidget, PressureWidget } from './components/StatWidgets';
 import MoonDetailView from './components/MoonDetailView';
 import LocationPicker from './components/LocationPicker';
+import LoginModal from './components/LoginModal';
+import UserProfile from './components/UserProfile';
+import { useAuth } from './components/AuthProvider';
 
 function App() {
   const [data, setData] = useState(null);
@@ -15,6 +18,8 @@ function App() {
   const [location, setLocation] = useState({ name: "San Diego", lat: 32.7157, lon: -117.1611 });
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [showDetailView, setShowDetailView] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     let timer;
@@ -44,6 +49,7 @@ function App() {
         <PremiumHeader
           location={location.name}
           status={`17° | ${data.moon.tithi.paksha} Paksha`}
+          onAuthClick={() => setShowAuthModal(true)}
         />
 
         <div id="moon-card-trigger">
@@ -107,6 +113,14 @@ function App() {
             onClose={() => setShowLocationPicker(false)}
           />
         </div>
+      )}
+
+      {showAuthModal && (
+        user ? (
+          <UserProfile onClose={() => setShowAuthModal(false)} />
+        ) : (
+          <LoginModal onClose={() => setShowAuthModal(false)} />
+        )
       )}
     </>
   );
