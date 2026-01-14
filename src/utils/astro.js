@@ -1,4 +1,4 @@
-import { MakeTime, Body, GeoVector, Ecliptic, SearchSunLongitude, SearchMoonPhase, Illumination, Equator } from 'astronomy-engine';
+import { MakeTime, Body, GeoVector, Ecliptic, SearchSunLongitude, SearchMoonPhase, Illumination, Equator, SearchRiseSet } from 'astronomy-engine';
 
 // Vedic Astrology Constants
 const NAKSHATRAS = [
