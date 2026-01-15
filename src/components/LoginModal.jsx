@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Mail, Lock, User, LogIn } from 'lucide-react';
+import { X, Mail, Lock, User, LogIn, Moon } from 'lucide-react';
 import { useAuth } from './AuthProvider';
 
 const LoginModal = ({ onClose }) => {
@@ -36,7 +36,16 @@ const LoginModal = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-xl p-6">
-            <div className="glass-card max-w-md w-full relative overflow-hidden">
+            {/* Full Moon Background */}
+            <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+                <img
+                    src="/assets/full_moon_detail.png"
+                    alt="Full Moon"
+                    className="moon-background-image"
+                />
+            </div>
+
+            <div className="glass-card max-w-md w-full relative overflow-hidden login-modal-enhanced">
                 {/* Close button */}
                 <button
                     onClick={onClose}
@@ -48,7 +57,9 @@ const LoginModal = ({ onClose }) => {
                 {/* Header */}
                 <div className="text-center mb-8">
                     <div className="flex items-center justify-center mb-4">
-                        <LogIn size={32} className="text-purple-400" />
+                        <div className="moon-icon-glow">
+                            <Moon size={40} className="text-blue-200" />
+                        </div>
                     </div>
                     <h2 className="text-2xl font-light text-white mb-2">
                         {isSignUp ? 'Create Account' : 'Welcome Back'}

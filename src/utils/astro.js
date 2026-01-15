@@ -1,4 +1,4 @@
-import { MakeTime, Body, GeoVector, Ecliptic, SearchSunLongitude, SearchMoonPhase, Illumination, Equator, SearchRiseSet } from 'astronomy-engine';
+import { MakeTime, Body, GeoVector, Ecliptic, SearchSunLongitude, SearchMoonPhase, Illumination, Equator, SearchRiseSet, Observer } from 'astronomy-engine';
 
 // Vedic Astrology Constants
 const NAKSHATRAS = [
@@ -79,8 +79,10 @@ export const getAstroData = (date, observer = null) => {
     let sunset = null;
     if (observer) {
         try {
-            const rise = SearchRiseSet(Body.Sun, observer, 1, time, 1);
-            const set = SearchRiseSet(Body.Sun, observer, -1, time, 1);
+            // Create proper Observer instance
+            const obs = new Observer(observer.latitude, observer.longitude, observer.height || 0);
+            const rise = SearchRiseSet(Body.Sun, obs, 1, time, 1);
+            const set = SearchRiseSet(Body.Sun, obs, -1, time, 1);
             if (rise) sunrise = rise.date;
             if (set) sunset = set.date;
         } catch (e) {
@@ -100,8 +102,10 @@ export const getAstroData = (date, observer = null) => {
     let moonset = null;
     if (observer) {
         try {
-            const mrise = SearchRiseSet(Body.Moon, observer, 1, time, 1);
-            const mset = SearchRiseSet(Body.Moon, observer, -1, time, 1);
+            // Create proper Observer instance
+            const obs = new Observer(observer.latitude, observer.longitude, observer.height || 0);
+            const mrise = SearchRiseSet(Body.Moon, obs, 1, time, 1);
+            const mset = SearchRiseSet(Body.Moon, obs, -1, time, 1);
             if (mrise) moonrise = mrise.date;
             if (mset) moonset = mset.date;
         } catch (e) {
